@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SOLE/LAB — Drop Store</title>
+  <meta name="description" content="SOLE/LAB: an independent sneaker showcase — Air Max 90, Samba OG and Ultraboost in scroll-driven 3D. Online checkout coming soon.">
+  <meta name="theme-color" content="#0c0c0e">
+  <meta property="og:title" content="SOLE/LAB — Drop Store">
+  <meta property="og:description" content="Three drops. One lab. Scroll to spin.">
+  <meta property="og:image" content="https://solelab.yan.io.vn/assets/og.jpg">
+  <meta property="og:url" content="https://solelab.yan.io.vn/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="preload" as="image" href="assets/img/box-closed.webp">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d0d10'/%3E%3Cpath d='M19 6 11 26' stroke='%23ff3b1f' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <script type="importmap">
+  { "imports": {
+      "gsap": "./vendor/gsap/index.js",
+      "gsap/ScrollTrigger": "./vendor/gsap/ScrollTrigger.js",
+      "lenis": "./vendor/lenis/lenis.js"
+  } }
+  </script>
+</head>
+<body class="is-loading">
+
+  <!-- ============ LOADER: the shoebox opens ============ -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__stage">
+      <img class="loader__box loader__box--closed" src="assets/img/box-closed.webp" alt="">
+      <img class="loader__box loader__box--open" src="assets/img/box-open.webp" alt="">
+      <img class="loader__shoe" data-src="hero-airmax90" alt="">
+    </div>
+    <div class="loader__meta">
+      <span class="loader__brand">SOLE/LAB</span>
+      <span class="loader__count"><span id="loadPct">0</span>%</span>
+    </div>
+  </div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="hdr" id="hdr">
+    <a class="hdr__logo" href="#top" aria-label="SOLE/LAB home">SOLE<span>/</span>LAB</a>
+    <nav class="hdr__nav" aria-label="Main">
+      <a href="#drops">Drops</a>
+      <a href="#lab">The Lab</a>
+      <a href="#shop">Shop</a>
+    </nav>
+    <button class="hdr__cart" id="cartBtn" aria-label="Open cart">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1.2 12.2a1 1 0 0 1-1 .8H8.2a1 1 0 0 1-1-.8L6 7Zm3 0V5.5a3 3 0 0 1 6 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      <span class="hdr__count" id="cartCount">0</span>
+    </button>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO: three drops, scroll to spin ============ -->
+    <section class="hero" id="drops" aria-label="Featured drops">
+      <div class="hero__pin">
+        <div class="hero__bgs">
+          <img class="hero__bg" data-src="bg-infrared" alt="">
+          <img class="hero__bg" data-src="bg-green" alt="">
+          <img class="hero__bg" data-src="bg-black-neon" alt="">
+        </div>
+        <canvas class="hero__dust" id="dust" aria-hidden="true"></canvas>
+
+        <div class="hero__type" aria-hidden="true">
+          <div class="hero__word" data-drop="0"><span>AIR MAX</span><span>90</span></div>
+          <div class="hero__word" data-drop="1"><span>SAMBA</span><span>OG</span></div>
+          <div class="hero__word" data-drop="2"><span>ULTRA</span><span>BOOST</span></div>
+        </div>
+
+        <div class="hero__stage">
+          <div class="hero__shadow"></div>
+          <!-- one rig per drop; 4 views each: A (3/4), B (side), B' (side, mirrored), A' (3/4 mirrored) -->
+          <div class="rig" data-drop="0">
+            <img class="view" data-src="hero-airmax90" alt="Nike Air Max 90 Infrared, three-quarter view">
+            <img class="view" data-src="side-airmax90" alt="">
+            <img class="view view--flip" data-src="side-airmax90" alt="">
+            <img class="view view--flip" data-src="hero-airmax90" alt="">
+            <div class="sheen" data-mask="hero-airmax90"></div>
+          </div>
+          <div class="rig" data-drop="1">
+            <img class="view" data-src="hero-samba" alt="adidas Samba OG Cloud White, three-quarter view">
+            <img class="view" data-src="side-samba" alt="">
+            <img class="view view--flip" data-src="side-samba" alt="">
+            <img class="view view--flip" data-src="hero-samba" alt="">
+            <div class="sheen" data-mask="hero-samba"></div>
+          </div>
+          <div class="rig" data-drop="2">
+            <img class="view" data-src="hero-ultraboost" alt="adidas Ultraboost Triple Black, three-quarter view">
+            <img class="view" data-src="side-ultraboost" alt="">
+            <img class="view view--flip" data-src="side-ultraboost" alt="">
+            <img class="view view--flip" data-src="hero-ultraboost" alt="">
+            <div class="sheen" data-mask="hero-ultraboost"></div>
+          </div>
+        </div>
+
+        <div class="hero__info">
+          <div class="drop-card" data-drop="0">
+            <p class="drop-card__kicker">Drop 01 — Nike</p>
+            <h1 class="drop-card__title">Air Max 90 <em>“Infrared”</em></h1>
+            <p class="drop-card__copy">The visible Air unit that started it. Mesh, suede, a hot-red flash. Back in the original 1990 spec.</p>
+            <div class="drop-card__row">
+              <span class="price">$140</span>
+              <button class="btn btn--solid" data-add="airmax90">Add to cart</button>
+            </div>
+          </div>
+          <div class="drop-card" data-drop="1">
+            <p class="drop-card__kicker">Drop 02 — adidas</p>
+            <h2 class="drop-card__title">Samba OG <em>“Cloud White”</em></h2>
+            <p class="drop-card__copy">Indoor football roots, terrace culture forever. Soft leather, suede T-toe, a gum sole that ages with you.</p>
+            <div class="drop-card__row">
+              <span class="price">$100</span>
+              <button class="btn btn--solid" data-add="samba">Add to cart</button>
+            </div>
+          </div>
+          <div class="drop-card" data-drop="2">
+            <p class="drop-card__kicker">Drop 03 — adidas</p>
+            <h2 class="drop-card__title">Ultraboost <em>“Triple Black”</em></h2>
+            <p class="drop-card__copy">Knit that moves like a sock, Boost that gives back every stride. All black, no excuses.</p>
+            <div class="drop-card__row">
+              <span class="price">$190</span>
+              <button class="btn btn--solid" data-add="ultraboost">Add to cart</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__progress" aria-hidden="true">
+          <span class="hero__num"><b id="dropNum">01</b>/03</span>
+          <div class="hero__bar"><i id="dropBar"></i></div>
+          <span class="hero__hint">Scroll to spin</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Air Max 90 ✺ Samba OG ✺ Ultraboost ✺ Air Force 1 ✺ Dunk Low ✺ Gazelle ✺ </span>
+        <span>Air Max 90 ✺ Samba OG ✺ Ultraboost ✺ Air Force 1 ✺ Dunk Low ✺ Gazelle ✺ </span>
+      </div>
+    </div>
+
+    <!-- ============ THE LAB: exploded view ============ -->
+    <section class="lab" id="lab" aria-label="Anatomy of the Air Max 90">
+      <div class="lab__pin">
+        <div class="lab__grid" aria-hidden="true"></div>
+        <header class="lab__head">
+          <p class="kicker">The Lab / 01</p>
+          <h2 class="lab__title">Take it <span class="outline">apart.</span></h2>
+          <p class="lab__lede">Five layers, one icon. Scroll to pull the Air Max 90 to pieces.</p>
+        </header>
+        <div class="lab__stage" id="labStage">
+          <svg class="lab__lines" id="labLines" aria-hidden="true"></svg>
+        </div>
+        <ol class="lab__labels" id="labLabels">
+          <li data-part="0"><b>01</b> Tongue &amp; collar <span>Padded foam, woven tab</span></li>
+          <li data-part="1"><b>02</b> Upper <span>Mesh base, suede &amp; leather overlays</span></li>
+          <li data-part="2"><b>03</b> Sockliner <span>Molded EVA footbed</span></li>
+          <li data-part="3"><b>04</b> Midsole <span>Polyurethane wedge, visible Max Air unit</span></li>
+          <li data-part="4"><b>05</b> Outsole <span>Waffle rubber, infrared pods</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ LAB RUNNER: true 360 (EffectCraft render) ============ -->
+    <section class="runner" id="runner" aria-label="Lab Runner 01, 360 degree view">
+      <div class="runner__pin">
+        <div class="runner__deg" aria-hidden="true"><span id="runnerDeg">0</span>°</div>
+        <div class="runner__stage">
+          <div class="runner__floor" aria-hidden="true"></div>
+          <canvas id="runnerCanvas" role="img" aria-label="Lab Runner 01 sneaker rotating"></canvas>
+          <p class="runner__drag" aria-hidden="true">⟵ drag to spin ⟶</p>
+        </div>
+        <div class="runner__copy">
+          <p class="kicker">The Lab / 02 — In-house</p>
+          <h2>Lab Runner <span class="outline">01</span></h2>
+          <p>Our own knit runner, modelled and rendered in full 3D. Every angle is real — scroll, or grab it and spin.</p>
+          <div class="runner__row">
+            <span class="price">$120</span>
+            <button class="btn btn--ghost" id="runnerWait">Coming soon</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COLORWAYS: paint wipe ============ -->
+    <section class="paint" id="paint" aria-label="Pick a colorway">
+      <div class="paint__inner">
+        <div class="paint__copy">
+          <p class="kicker">Colorways</p>
+          <h2 class="paint__title">Same icon.<br><span id="paintName">Infrared.</span></h2>
+          <p class="paint__lede">Three takes on the 90. Tap a swatch and watch it repaint.</p>
+          <div class="swatches" role="radiogroup" aria-label="Colorway">
+            <button class="swatch is-on" role="radio" aria-checked="true" data-cw="0" style="--c:#ff3b1f" aria-label="Infrared"></button>
+            <button class="swatch" role="radio" aria-checked="false" data-cw="1" style="--c:#2747c9" aria-label="Royal"></button>
+            <button class="swatch" role="radio" aria-checked="false" data-cw="2" style="--c:#d7ff2f" aria-label="Volt"></button>
+          </div>
+        </div>
+        <div class="paint__stage" id="paintStage">
+          <div class="paint__layer is-on" data-cw="0"><img data-src="hero-airmax90" alt="Air Max 90 Infrared"></div>
+          <div class="paint__layer" data-cw="1"><img data-src="color-airmax90-blue" alt="Air Max 90 Royal"></div>
+          <div class="paint__layer" data-cw="2"><img data-src="color-airmax90-black" alt="Air Max 90 Black Volt"></div>
+          <div class="paint__stroke" id="paintStroke" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MATERIALS: horizontal macro run ============ -->
+    <section class="mats" id="mats" aria-label="Materials">
+      <div class="mats__pin">
+        <div class="mats__track" id="matsTrack">
+          <div class="mats__intro">
+            <p class="kicker">Up close</p>
+            <h2>Made of<br>details.</h2>
+            <p>Every pair, inspected at 100×. Scroll sideways through what you are actually paying for.</p>
+          </div>
+          <figure class="mat"><div class="mat__img"><img data-src="macro-mesh" alt="Macro of engineered sneaker mesh"></div><figcaption><b>Mesh</b> Breathes where your foot heats up.</figcaption></figure>
+          <figure class="mat"><div class="mat__img"><img data-src="macro-airunit" alt="Macro of a visible air unit"></div><figcaption><b>Air</b> Pressurised, visible, still a flex.</figcaption></figure>
+          <figure class="mat"><div class="mat__img"><img data-src="macro-suede" alt="Macro of green suede with stitching"></div><figcaption><b>Suede</b> Brushed nap, double stitched.</figcaption></figure>
+          <figure class="mat"><div class="mat__img"><img data-src="macro-gumsole" alt="Macro of a gum rubber outsole"></div><figcaption><b>Gum</b> Herringbone grip that ages gold.</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ AFTER DARK: flashlight reveal ============ -->
+    <section class="dark" id="dark" aria-label="Reflective detail">
+      <div class="dark__scene" id="darkScene">
+        <img class="dark__street" data-src="bg-night-street" alt="">
+        <div class="dark__glow" id="darkGlow"><img data-src="night-reflective" alt="Running sneaker with reflective panels glowing under flash"></div>
+      </div>
+      <div class="dark__copy">
+        <p class="kicker">After dark</p>
+        <h2>Lights off.<br><span class="outline">Still seen.</span></h2>
+        <p>3M reflective panels throw your headlights straight back. Move your cursor — or hit the flash.</p>
+        <button class="btn btn--ghost" id="flashBtn">⚡ Flash</button>
+      </div>
+      <div class="dark__flash" id="darkFlash" aria-hidden="true"></div>
+    </section>
+
+    <!-- ============ VERSUS: drag to compare ============ -->
+    <section class="vs" id="vs" aria-label="Nike versus adidas">
+      <header class="vs__head">
+        <p class="kicker">Versus</p>
+        <h2>Pick a side.</h2>
+      </header>
+      <div class="vs__frame" id="vsFrame">
+        <div class="vs__side vs__side--a">
+          <img data-src="hero-airmax90" alt="Nike Air Max 90">
+          <div class="vs__tag"><b>Nike</b> Air Max 90<span>Cushion: visible Air · 1990 · $140</span></div>
+        </div>
+        <div class="vs__side vs__side--b" id="vsB">
+          <img data-src="hero-samba" alt="adidas Samba OG">
+          <div class="vs__tag"><b>adidas</b> Samba OG<span>Sole: gum rubber · 1950 · $100</span></div>
+        </div>
+        <div class="vs__handle" id="vsHandle" role="slider" tabindex="0" aria-label="Compare" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><span>⟷</span></div>
+      </div>
+    </section>
+
+    <!-- ============ STREET ============ -->
+    <section class="street" aria-label="On the street">
+      <div class="street__copy">
+        <p class="kicker">Worn, not stored</p>
+        <h2>Built for <span class="outline">pavement.</span></h2>
+      </div>
+      <div class="street__grid">
+        <figure class="shot shot--wide"><img data-src="life-street" alt="Air Max 90 walking a crosswalk at golden hour"></figure>
+        <figure class="shot"><img data-src="life-court" alt="Samba on a basketball at sunset"></figure>
+        <figure class="shot"><img data-src="life-stairs" alt="Ultraboost jumping down concrete stairs"></figure>
+      </div>
+    </section>
+
+    <!-- ============ SHOP ============ -->
+    <section class="shop" id="shop" aria-label="Shop">
+      <header class="shop__head">
+        <div>
+          <p class="kicker">Shop</p>
+          <h2>The rack.</h2>
+        </div>
+        <div class="filters" role="tablist" aria-label="Filter by brand">
+          <button class="filter is-on" role="tab" aria-selected="true" data-f="all">All</button>
+          <button class="filter" role="tab" aria-selected="false" data-f="nike">Nike</button>
+          <button class="filter" role="tab" aria-selected="false" data-f="adidas">adidas</button>
+        </div>
+      </header>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <!-- ============ FINALE ============ -->
+    <section class="finale" aria-label="Shop the drop">
+      <div class="belt" aria-hidden="true"><div class="belt__track" id="belt"></div></div>
+      <h2 class="finale__title"><span>Shop</span> <span class="outline">the</span> <span>drop.</span></h2>
+      <a class="btn btn--solid btn--xl" href="#shop">Enter the rack</a>
+    </section>
+  </main>
+
+  <footer class="ftr">
+    <div class="ftr__logo">SOLE<span>/</span>LAB</div>
+    <p class="ftr__note">SOLE/LAB is an independent showcase, not affiliated with or endorsed by Nike, Inc. or adidas AG. Product names and marks belong to their owners. Product imagery is AI-generated. Online checkout is coming soon — nothing is sold or charged yet.</p>
+    <p class="ftr__small">3D model “Materials Variants Shoe” © 2021 Shopify, <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>, via the Khronos glTF Sample Assets; rendered in EffectCraft.</p>
+    <p class="ftr__small">© 2026 SOLE/LAB</p>
+  </footer>
+
+  <!-- ============ QUICK VIEW ============ -->
+  <div class="qv" id="qv" role="dialog" aria-modal="true" aria-labelledby="qvTitle" hidden>
+    <div class="qv__scrim" data-close></div>
+    <div class="qv__panel" id="qvPanel">
+      <button class="qv__close" data-close aria-label="Close">×</button>
+      <div class="qv__media" id="qvMedia"></div>
+      <div class="qv__body">
+        <p class="kicker" id="qvBrand"></p>
+        <h3 id="qvTitle"></h3>
+        <p class="qv__price" id="qvPrice"></p>
+        <p class="qv__copy" id="qvCopy"></p>
+        <p class="qv__label">Size (EU)</p>
+        <div class="sizes" id="qvSizes"></div>
+        <button class="btn btn--solid btn--block" id="qvAdd">Add to cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CART ============ -->
+  <aside class="cart" id="cart" aria-label="Cart" hidden>
+    <div class="cart__scrim" data-close-cart></div>
+    <div class="cart__panel">
+      <header class="cart__head"><h3>Your bag</h3><button class="qv__close" data-close-cart aria-label="Close cart">×</button></header>
+      <ul class="cart__list" id="cartList"></ul>
+      <p class="cart__empty" id="cartEmpty">Nothing here yet. The rack is waiting.</p>
+      <footer class="cart__foot">
+        <div class="cart__row"><span>Subtotal</span><b id="cartTotal">$0</b></div>
+        <button class="btn btn--solid btn--block" id="checkout">Checkout — coming soon</button>
+        <p class="cart__demo">Checkout is coming soon — no payment is taken.</p>
+      </footer>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="prints" id="prints" aria-hidden="true"></div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

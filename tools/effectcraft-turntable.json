@@ -1,0 +1,14 @@
+[
+  {"command": "comp.new", "params": {"name": "turntable", "width": 1200, "height": 900, "frameRate": 24, "duration": 3, "background": "#000000", "renderer": "advanced3D", "open": true}},
+  {"command": "layer.newModel", "params": {"path": "C:/Users/CANAWAN PC/Code_SID-Corp/landing-lab/builds/sneaker-store/work/model/shoe.glb", "name": "shoe"}},
+  {"command": "prop.set", "params": {"layer": "shoe", "path": "transform/position", "value": [600, 650, 0]}},
+  {"command": "prop.set", "params": {"layer": "shoe", "path": "transform/scale", "value": [185, 185, 185]}},
+  {"command": "prop.setExpression", "params": {"layer": "shoe", "path": "transform/rotationY", "expression": "time * 120"}},
+  {"command": "material.set", "params": {"layers": ["shoe"], "castsShadows": "on"}},
+  {"command": "layer.newLight", "params": {"kind": "Environment", "name": "env", "intensity": 100, "color": "#e9eef7"}},
+  {"command": "layer.newLight", "params": {"kind": "Spot", "name": "key", "intensity": 150, "color": "#fff4e6", "position": [200, -300, -900], "poi": [600, 450, 0], "coneAngle": 70, "coneFeather": 60, "castsShadows": true, "shadowDarkness": 60, "shadowDiffusion": 40}},
+  {"command": "layer.newLight", "params": {"kind": "Spot", "name": "rim", "intensity": 90, "color": "#cfe2ff", "position": [1100, 100, 900], "poi": [600, 450, 0], "coneAngle": 80, "coneFeather": 70}},
+  {"command": "layer.newCamera", "params": {"name": "cam", "type": "twoNode", "preset": "50mm", "position": [600, 40, -1700], "poi": [600, 470, 0]}}
+]
+
+
