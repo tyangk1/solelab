@@ -239,8 +239,8 @@ if (!R) {
       const a = ease.out(k(f, endAt, endAt + 8));
       html = `<div class="black" style="opacity:${a * .92}"></div>
         <div class="t" style="font-size:${SZ.mid * 1.5}px;top:${R ? 36 : 44}%;opacity:${a};transform:translate(-50%,-50%) scale(${1.2 - .2 * a})">SOLE<span style="color:#ff3b1f">/</span>LAB</div>
-        <div class="pill" style="--pill:${SZ.pill}px;top:${R ? 44 : 56}%;opacity:${a}">solelab-demo.vercel.app</div>
-        <div class="t" style="top:${R ? 55 : 88}%;opacity:${a * .7}"><span class="sub" style="--sub:${R ? 13 : 15}px">Concept demo · not affiliated with Nike or adidas</span></div>`;
+        <div class="pill" style="--pill:${SZ.pill}px;top:${R ? 44 : 56}%;opacity:${a}">solelab.yan.io.vn</div>
+        <div class="t" style="top:${R ? 55 : 88}%;opacity:${a * .7}"><span class="sub" style="--sub:${R ? 13 : 15}px;line-height:1.9">${R ? 'Independent showcase<br>not affiliated with Nike or adidas' : 'Independent showcase · not affiliated with Nike or adidas'}</span></div>`;
     }
     await overlay(v, html);
   });
