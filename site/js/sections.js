@@ -104,7 +104,7 @@ function initLab({ RM, MOBILE }) {
   }
 }
 
-/* ---------- LAB RUNNER: 72-frame EffectCraft turntable ---------- */
+/* ---------- LAB RUNNER: 72-frame pre-rendered turntable ---------- */
 function initRunner({ RM, MOBILE }) {
   const N = 72;
   const sec = document.getElementById('runner');
